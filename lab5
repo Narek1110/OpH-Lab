@@ -1,0 +1,159 @@
+1)Ստեղծել կամայական արժեքով փոփոխական՝ str: Ցուցադրել հետեւյալ հրամանների աշխատանքի արդյունքի տարբերությունը.echo $str2echo ${str}2 
+Narek@Narek MINGW64 ~/Desktop $ ~ % str="hello"
+Narek@Narek MINGW64 ~/Desktop $ ~ % echo $str2 
+Narek@Narek MINGW64 ~/Desktop $ ~ % echo ${str}2
+hello2
+
+2)Արտածել հետևյալ արտահայտության արժեքը․ (5^2∗4)/10
+
+Narek@Narek MINGW64 ~/Desktop $ ~ echo $((5**2*4/10))
+10
+
+3) Ցուցադրել հետևյալ հրամանների աշխատանքի արդյունքի տարբերությունը․
+echo "The balance for user $USER is: $5.00"
+echo "The balance for user $USER is: \$5.00"
+
+Narek@Narek MINGW64 ~/Desktop $ ~ % echo "The balance for user $USER is: $5.00"
+The balance for user Narek is: .00
+Narek@Narek MINGW64 ~/Desktop $ ~ % echo "The balance for user $USER is: \$5.00"
+The balance for user Narek is: $5.00
+
+4)Ցուցադրել հետևյալ հրամանների աշխատանքի արդյունքի տարբերությունը․
+echo '$USER $((2 + 2)) $(ls)'
+echo "$USER $((2 + 2)) $(ls)"
+
+Narek@Narek MINGW64 ~/Desktop $ ~ % echo '$USER $((2 + 2)) $(ls)'
+$USER $((2 + 2)) $(ls)
+
+//դիտարկում է որպես output
+Narek@Narek MINGW64 ~/Desktop $ ~ % echo "$USER $((2 + 2)) $(ls)"
+Narek 4 Applications
+Desktop
+Documents
+Downloads
+IdeaProjects
+Library
+//կտպի թղթապանակի պարունակությունը
+
+5)Առանձին տողերում արտածել ընթացիկ դիրեկտորիան և այնտեղ առկա տեքստային
+ֆայլերի քանակը։ Օգտագործել Here document:
+
+cat <<EOF
+Current Directory: $(pwd)
+Text in Current Directory:
+$(ls -l)
+Number of Files: $(ls | wc -l)
+EOF
+
+Narek@Narek MINGW64 ~/Desktop $ ~ % cd /Users/Narek/Desktop
+Narek@Narek MINGW64 ~/Desktop $ Desktop % bash namesofdir.sh
+Current Directory: /Users/Narek/Desktop
+Text in Current Directory:
+total 2896
+-rw-r--r--@  1 Narek  staff     234 Dec  7 21:37 2,3,5 2.sh
+-rw-r--r--@  1 Narek  staff     232 Dec  7 21:08 2,3,5.sh
+-rw-r--r--@  1 Narek  staff      92 Dec  8 20:41 3mult.sh
+-rw-r--r--@  1 Narek  staff     804 Nov 19 22:18 Calendar
+-rw-r--r--@  1 Narek  staff     804 Nov 19 22:19 Find My
+drwxr-xr-x@  4 Narek  staff     128 Dec 27  2022 Harvard .app
+drwxr-xr-x@  3 Narek  staff      96 Aug 27 14:27 IntelliJ IDEA CE.app
+drwxr-xr-x@ 13 Narek  staff     416 Nov 19 22:14 M'
+-rw-r--r--@  1 Narek  staff     804 Jul 25 11:17 Music
+.
+.
+.
+Number of Files:       60
+// մի քանիսն եմ գրել
+
+
+6)Գրել 2 թվեր գումարող ֆունկցիա։ Թվերը ֆունկցիային փոխանցել որպես արգումենտներ։ 
+
+ sum() {
+        sum=$(( $1 + $2 ))
+        echo "sum= $sum"
+    }
+sum 1 11
+
+Narek@Narek MINGW64 ~/Desktop $ Desktop % cd /Users/Narek/Desktop
+Narek@Narek MINGW64 ~/Desktop $ Desktop % bash sumfunction().sh
+12
+
+7)Գրել ֆունկցիա, որը որպես արգումենտ կստանա դիրեկտորիայի անվանումը եւ կարտածի այնտեղ առկա ֆայլերի քանակը։ 
+#!/bin/bash
+count(){
+       cd $1
+       echo $(ls | wc -l)
+count /Users/Desktop
+
+Narek@Narek MINGW64 ~/Desktop $ Desktop % bash countfunction().sh 
+63
+
+
+8)Գրել սկրիպտ, որում նոր ստեղծված ֆայլի համար ստուգել, թե արդյոք այն ունի
+կարդալու / գրելու / կատարելու թույլտվություն, և արտածել համապատասխան
+հաղորդագրություն։
+
+file="new_file.txt"
+
+
+if [ -r "$file" ]; then
+    echo "$file has read permission."
+else
+    echo "$file does not have read permission."
+fi
+
+
+if [ -w "$file" ]; then
+    echo "$file has write permission."
+else
+    echo "$file does not have write permission."
+fi
+
+
+if [ -x "$file" ]; then
+    echo "$file has execute permission."
+else
+    echo "$file does not have execute permission."
+fi
+
+
+Narek@Narek MINGW64 ~/Desktop $ Desktop % touch newfile.txt
+Narek@Narek MINGW64 ~/Desktop $ Desktop % chmod +x checking.sh
+Narek@Narek MINGW64 ~/Desktop $ Desktop % ./checking.sh newfile.txt
+new_file.txt does not have read permission.
+new_file.txt does not have write permission.
+new_file.txt does not have execute permission.
+
+9)Գրել սկրիպտ, որը կորոշի տրված 2 թվերից մեծագույնը եւ կարտածի։ 
+
+#!/bin/bash 
+a=9
+b=10
+if [ "$a" -gt "$b" ]; then
+    echo "max $a"
+elif [ "$a" -lt "$b" ]; then
+    echo "max $b "
+else
+    echo "$a=$b "
+fi
+
+Narek@Narek MINGW64 ~/Desktop $ Desktop % chmod +x maxnum.sh
+Narek@Narek MINGW64 ~/Desktop $ Desktop % ./maxnum.sh 
+max 10 
+
+10)Գրել սկրիպտ, որը կորոշի տրված թիվը զույգ է, թե կենտ։ Արտածել համապատասխան հաղորդագրություն։ 
+
+#!/bin/bash
+
+read -p "Enter a number: " number
+
+if ((number % 2 == 0)); then
+    echo "$number is even"
+else
+    echo "$number is odd"
+fi
+
+Narek@Narek MINGW64 ~/Desktop $ Desktop % chmod +x evenodd5.sh
+Narek@Narek MINGW64 ~/Desktop $ Desktop % ./evenodd5.sh
+Enter a number: 746
+746 is even

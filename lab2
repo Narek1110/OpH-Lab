@@ -1,0 +1,79 @@
+1)Կատարել հետեւյալ հրամանները, բացատրել տարբերությունը. 
+cat > file1 - մուտքագրված տեքստը գրում է ֆայլում
+cat file1 - տպում է ֆայլի ինֆորմացիան առանց վերահասցեավորման դեպի ֆայլ
+cat < file1 - տպում է ֆայլի ինֆորմացիան 
+
+2)Ստեղծել որոշակի պարունակությամբ 3 տեքստային ֆայլ՝ file1.txt, file2.txt, file3.txt։ Այս ֆայլերի պարունակությունը կցել միմյանց եւ գրել նոր ֆայլում՝ final.txt։ 
+Narek@Narek MINGW64 ~/Desktop $ ~ % cd Desktop
+Narek@Narek MINGW64 ~/Desktop $ Desktop % touch file1.txt file2.txt file3.txt
+Narek@Narek MINGW64 ~/Desktop $ Desktop % cat > file1.txt
+Narek
+Narek@Narek MINGW64 ~/Desktop $ Desktop % cat > file2.txt
+Gevorgyan
+Narek@Narek MINGW64 ~/Desktop $ Desktop % cat > file3.txt
+G201
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % cat file1.txt file2.txt file3.txt > final.txt
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % cat  final.txt
+Narek 
+Gevorgyan
+G201
+
+3)Ցուցադրել /home/student դիրեկտորիայում տեքստային ֆայլերի քանակը։ 
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % find /home/student -type f -name "*.txt" | wc -l
+5
+
+4)Սորտավորել file1.txt, file2.txt, file3.txt ֆայլերի պարունակությունը եւ գրել նոր ֆայլում։ 
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % sort file1.txt file2.txt file3.txt > sorted.txt
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % cat sorted.txt
+G201
+Gevorgyan
+Narek
+
+5)Արտածել /home/student դիրեկտորիայի առաջին 15 ֆայլերը՝ դասավորված նվազման կարգով ըստ ֆայլի ծավալի։ 
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % ls -S > size.txt // կամ ls -l, եթե ֆայլային ավելի շատ ինֆորմացիա է անհրաժեշտ
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % head -n 15 size.txt
+count.txt
+final.txt
+sorted.txt
+file2.txt
+file1.txt
+file3.txt
+size.txt
+
+6)Արտածել /home/student դիրեկտորիայի ֆայլերի ցուցակը, միաժամանակ այն տեղադրելով ls.txt ֆայլում։ 
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % ls | cat > ls.txt | cat ls.txt 
+list.txt
+file1.txt
+file2.txt
+file3.txt
+final.txt
+ls.txt
+size.txt
+sorted.txt
+
+7)Օգտագործելով tr հրամանը՝ գաղտնագրել "secret text" տողը ROT13 ալգորիթմով։ Վերծանել գաղտնագրված հաղորդագրությունը։ 
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % echo "secret text" | tr 'a-z' 'n-za-m'
+frperg grkg
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % echo “frpera grkg” | tr ’n-za-m’ ‘a’-z
+secret text
+
+8)Ստեղծել նոր ֆայլ՝ home.txt, հետեւյալ պարունակությամբ.Student’s home directory is {home_dir}.sed հրամանի միջոցով փոխարինել {home_dir} հատվածը /home/student-ով։ 
+Narek@Narek MINGW64 ~/Desktop $ ~ % echo "Student's home directory is {home_dir}." > home.txt
+Narek@Narek MINGW64 ~/Desktop $ ~ % sed -i "s|{home_dir}|/home/student|g" home.txt
+
+9)Ստեղծել ֆայլ, որն ունի առնվազն 5 տող պարունակություն՝ file4.txt։ Արտածել 2-4-րդ տողերը։ 
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % cat > file4.txt
+12345
+56789
+tver
+barer
+tarer
+
+Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % sed -n ‘2,4’p file4.txt
+56789
+tver
+barer
+
+10)Ջնջել file4.txt ֆայլի 2-4-րդ տողերը։ Narek@Narek MINGW64 ~/Desktop $ ~ Desktop % sed ‘2,4’d file4.txt
+12345
+tarer
